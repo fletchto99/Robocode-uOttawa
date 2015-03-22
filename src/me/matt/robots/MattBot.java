@@ -13,7 +13,7 @@ import robocode.ScannedRobotEvent;
  * 
  * 1. Stop and go - Occasionally the robot will stop for a split second
  * 2. Velocity change - Set the velocity to a psudo-random number between the MIN_VELOCITY and MAX_VELOCITY
- * 3. Oscelating driving when near the enemy
+ * 3. Oscelating flower pattern driving when near the enemy
  * 4. Multi colour camouflage - Dosn't really help dodge but it just looks funny
  * 
  * It has 1 gun strategy:
@@ -41,7 +41,7 @@ public class MattBot extends AdvancedRobot {
     /**
      * The distance that we define as safe between our robot and the enemy, any closer and we might collide
      */
-    private final int SAFE_DISTANCE = 120;
+    private final int SAFE_DISTANCE = 130;
 
     /**
      * The distance to travel when dodging the enemy bot; before turning perpendicular again
@@ -51,17 +51,17 @@ public class MattBot extends AdvancedRobot {
     /**
      * The modifier which acts on the maximum velocity of the tank.
      */
-    private final double MIN_VELOCITY = 2;
+    private final double MIN_VELOCITY = 6;
 
     /**
      * 75% of the time the velocity of our tank won't change
      */
-    private final double VELOCITY_CHANGE = 2.5;
+    private final double VELOCITY_CHANGE = 20;
 
     /**
-     * 40% of the time the tank will stop temporarly (to avoid bullets and confuse the enemy)
+     * 40% of the time the tank will stop temporarily (to avoid bullets and confuse the enemy)
      */
-    private final double STOP_CHANCE = 1.0;
+    private final double STOP_CHANCE = 1.5;
 
     /*
      * Run the robot, setup some robot defaults
@@ -261,7 +261,7 @@ public class MattBot extends AdvancedRobot {
         /*
          * Turn the tank perpendicular to the enemy and prepare to dodge them
          */
-        setTurnRight(-1 * (enemyBearing - 90));
+        setTurnRight((forward ? 1 : -1) * (enemyBearing - 90));
     }
 
     /**
