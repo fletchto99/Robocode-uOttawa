@@ -8,7 +8,7 @@ import robocode.ScannedRobotEvent;
 /**
  * This is the main robot class for Robocode uOttawa 2015.
  * 
- * It employs a tacit that will drive directly towards the target until it gets a safe distance away from the robot. Once it is a safe distance away
+ * It employs a tactic that will drive directly towards the target until it gets a safe distance away from the robot. Once it is a safe distance away
  * it employs dodging techniques. It has 4 techniques:
  * 
  * 1. Stop and go - Occasionally the robot will stop for a split second
@@ -259,7 +259,7 @@ public class MattBot extends AdvancedRobot {
                 degreeOffset, 11));
 
         /*
-         * Turn the tank perpendicular to the enemy and prepare to dodge them
+         * Turn the tank perpendicular to the enemy and prepare to dodge them in an oscelating flower pattern
          */
         setTurnRight((forward ? 1 : -1) * (enemyBearing - 90));
     }
