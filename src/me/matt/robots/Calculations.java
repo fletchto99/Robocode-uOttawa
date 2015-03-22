@@ -1,5 +1,6 @@
 package me.matt.robots;
 
+import java.awt.Color;
 import java.util.Random;
 
 /**
@@ -53,10 +54,14 @@ public class Calculations {
          */
         if (enemyVelocity > 0) {
             /*
-             * Decrease the power the cannon fires at as the distance increases
+             * Decrease the power the cannon fires at as the distance and velocity of the enemy increases
              */
-            while ((distance -= 150) > 0) {
-                power--;
+            distance -= 150;
+            enemyVelocity -= 4;
+            while (distance > 0 && enemyVelocity > 0) {
+                distance -= 150;
+                enemyVelocity -= 4;
+                power -= 0.5;
             }
         }
 
@@ -80,6 +85,13 @@ public class Calculations {
      */
     public static double random(double min, double max) {
         return min + ((max - min) * random.nextDouble());
+    }
+
+    public static Color randomColour() {
+        float r = random.nextFloat();
+        float g = random.nextFloat();
+        float b = random.nextFloat();
+        return new Color(r, g, b);
     }
 
 }
