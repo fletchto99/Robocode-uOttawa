@@ -3,12 +3,12 @@ package me.matt.robots;
 import java.awt.Color;
 import java.util.Random;
 
+import robocode.util.Utils;
+
 /**
- * This class is used for some calculations within our robot for uOttawa 2015 robo code.
+ * This class is used for some calculations within our robot for uOttawa 2015 robo code. See {@src:MattBot.java}.
  *
  * @author Matt Langlois (Fletchto99@gmail.com)
- * @author Yann Landry (yann.landry.94@gmail.com)
- * @author Joel Faubert
  */
 public class Calculations {
 
@@ -25,8 +25,8 @@ public class Calculations {
      */
     public static double calculateLinearOffset(double velocity, double heading,
             double bearing) {
-        return Math.toDegrees(Math.sin(Math.toRadians(heading - bearing)))
-                * velocity;
+        return velocity
+                * Math.toDegrees(Math.sin(Math.toRadians(heading - bearing)));
     }
 
     /**
@@ -87,11 +87,44 @@ public class Calculations {
         return min + ((max - min) * random.nextDouble());
     }
 
+    /**
+     * Creates a random colour based off of random float values
+     * 
+     * @return a random colour based off of randomness
+     */
     public static Color randomColour() {
+        /*
+         * RGB values of the colour
+         */
         float r = random.nextFloat();
         float g = random.nextFloat();
         float b = random.nextFloat();
+
+        /*
+         * The color object
+         */
         return new Color(r, g, b);
+    }
+
+    /**
+     * Calculate the angle to our enemy relative to our components angle
+     * 
+     * @param directAngle
+     *            The angle directly to our enemy relative to our diction
+     * @param offset
+     *            The angle we wish to offset by
+     * @param divisor
+     *            A random factor to make it less predictable
+     * @return The angle at which to turn our component to
+     */
+    public static double calculateNormalAngleToEnemy(double directAngle,
+            double offset, double divisor) {
+        /*
+         * Find the Normal angle because we want the opposite relative to our current angle. We want the normal angle because the direct angle is the
+         * offset in the direction of our travel
+         */
+        return Utils.normalRelativeAngleDegrees(directAngle
+                + (offset / divisor));
     }
 
 }
